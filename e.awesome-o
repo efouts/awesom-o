@@ -1,7 +1,16 @@
 #!/usr/bin/env python
 
+import json
+import requests
+import sys
+
 def main():
-    print 'awesome-oooo'
+    host = sys.argv[1]
+    metric = sys.argv[2]
+
+    url = ("http://%s/graphite/render?format=json&target=%s" % (host, metric))
+    response = requests.get(url)
+    jsonResponse = json.loads(response.text)
 
 if __name__ == "__main__":
     main()
